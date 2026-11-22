@@ -1,0 +1,307 @@
+@import "tailwindcss";
+
+@theme {
+  /* Lusion-inspired core polarity palette */
+  --color-alabaster: #f0f1fa;
+  --color-alabaster-deep: #e4e6ef;
+  --color-white: #ffffff;
+  --color-obsidian: #000000;
+  --color-obsidian-soft: #11131a;
+  --color-slate-pill: #2b2e3a;
+  --color-cobalt: #1a2ffb;
+  --color-cobalt-deep: #0016ec;
+  --color-cobalt-dark: #071bdf;
+  --color-cyan-arc: #00d9ff;
+  --color-lime: #c1ff00;
+  --color-coral: #e90000;
+  --color-muted: #5a6073;
+  --color-muted-light: #9ea4b8;
+}
+
+@theme inline {
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  color-scheme: light;
+  --color-off-white: #f0f1fa;
+  --color-dark-white: #e4e6ef;
+  --color-blue: #1a2ffb;
+  --color-dark-blue: #0016ec;
+  --color-grey-blue: #2b2e3a;
+  --color-lime: #c1ff00;
+  --global-radius: 20px;
+  --card-radius: 15px;
+  --pill-shadow: 0 6px 14px rgb(0 0 0 / 0.05), 0 2px 4px rgb(0 0 0 / 0.04);
+}
+
+html {
+  background: var(--color-off-white);
+}
+
+body {
+  background: var(--color-off-white);
+  color: #000000;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-blue);
+  color: #ffffff;
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Lusion Display Typography: Architectural weight 400 with tight negative tracking */
+.lusion-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 0.96;
+}
+
+.lusion-mono {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Lusion Signature Expanding-Dot Pill CTA (white capsule -> electric cobalt on hover) */
+.lusion-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.95rem;
+  height: 3.25rem;
+  padding: 0 1.6rem 0 1.35rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  color: #000000;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  overflow: hidden;
+  box-shadow: var(--pill-shadow);
+  transition: color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.35s ease,
+    transform 0.25s ease;
+}
+
+.lusion-pill::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-blue);
+  transform: scale(0.05);
+  transform-origin: 1.55rem 50%;
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.2s ease;
+  z-index: 0;
+}
+
+.lusion-pill:hover::before,
+.lusion-pill:focus-visible::before {
+  transform: scale(1.15);
+  opacity: 1;
+}
+
+.lusion-pill:hover,
+.lusion-pill:focus-visible {
+  color: #ffffff;
+}
+
+.lusion-pill-dot {
+  position: relative;
+  z-index: 1;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: currentColor;
+  transition: transform 0.3s ease, opacity 0.25s ease;
+}
+
+.lusion-pill:hover .lusion-pill-dot,
+.lusion-pill:focus-visible .lusion-pill-dot {
+  transform: scale(0);
+  opacity: 0;
+}
+
+.lusion-pill-label {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lusion-pill:hover .lusion-pill-label,
+.lusion-pill:focus-visible .lusion-pill-label {
+  transform: translateX(-0.55rem);
+}
+
+.lusion-pill-arrow {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  width: 0;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: width 0.3s ease, opacity 0.3s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lusion-pill:hover .lusion-pill-arrow,
+.lusion-pill:focus-visible .lusion-pill-arrow {
+  width: 1rem;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Dark Pill Variant (LET'S TALK / ENQUIRY) */
+.lusion-pill-dark {
+  background: var(--color-grey-blue);
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.lusion-pill-dark::before {
+  background: var(--color-dark-blue);
+}
+
+/* Lusion Featured Card Hover Arrow Reveal */
+.lusion-card-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.lusion-card-arrow {
+  display: inline-block;
+  width: 0;
+  opacity: 0;
+  transform: translateX(-14px);
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.25s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  color: var(--color-blue);
+}
+
+.group:hover .lusion-card-arrow,
+.group:focus-visible .lusion-card-arrow {
+  width: 1.35em;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Infinite marquee */
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 56s) linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Pulse used on map nodes */
+@keyframes node-pulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+.node-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: node-pulse 2.4s ease-out infinite;
+}
+
+/* Audio equalizer wave animation */
+@keyframes wave-bar {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.wave-bar {
+  transform-origin: center;
+  animation: wave-bar 0.9s ease-in-out infinite;
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  padding: 0.65rem 1.25rem;
+  border-radius: 9999px;
+  background: var(--color-blue);
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+}
+
+/* Subtle architectural registration grid */
+.lusion-grid-bg {
+  background-image:
+    linear-gradient(rgb(26 47 251 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(26 47 251 / 0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* Thin scrollbars */
+.thin-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(26 47 251 / 0.35) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .node-pulse,
+  .wave-bar {
+    animation: none;
+  }
+}
